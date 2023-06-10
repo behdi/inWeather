@@ -1,4 +1,4 @@
-import { Environment } from 'src/app/core/models/environment.model';
+import { Environment } from '@inWeather/core';
 
 export const environment: Environment = {
   WEATHER_API: {
