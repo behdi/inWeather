@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { GeoData } from '../interfaces';
-import { GEO_CODING_ENDPOINTS } from '../models';
+import { GEO_CODING_ENDPOINTS, WEATHER_ENDPOINTS } from '../models';
+import { CurrentWeather } from '../interfaces/current-weather.model';
 
 /**
  * API service
@@ -30,6 +31,29 @@ export class ApiService {
     });
 
     return this._http.get<GeoData[]>(url);
+  }
+
+  /**
+   * Get current weather data for specified location.
+   *
+   * @param lat - Latitude of the desired location.
+   * @param lon - Longitude of the desired location.
+   * @param units - unit the data should be displayed in.
+   * @returns current weather of the specified location
+   */
+  getCurrentWeather(
+    lat: string,
+    lon: string,
+    units: 'metric' | 'imperial' = 'metric'
+  ) {
+    const url = this.getURL(WEATHER_ENDPOINTS.CURRENT, {
+      lat,
+      lon,
+      units,
+      apiKey: environment.WEATHER_API.API_KEY,
+    });
+
+    return this._http.get<CurrentWeather[]>(url);
   }
 
   /**
