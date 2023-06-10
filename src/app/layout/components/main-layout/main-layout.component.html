@@ -1,0 +1,26 @@
+<nz-layout>
+  <nz-header>
+    <img class="logo" [src]="logo" alt="Logo" />
+
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li
+        *ngFor="let item of menuItems"
+        nz-menu-item
+        [nzDisabled]="item.isDisabled"
+        [nzSelected]="item.isSelected"
+        [nzMatchRouter]="item.isMatchRouter"
+        [nzMatchRouterExact]="item.isMatchRouterExact"
+      >
+        <a [routerLink]="item.routerLink">
+          {{ item.text }}
+        </a>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <ng-content select="[content]"></ng-content>
+  </nz-content>
+  <nz-footer>
+    <ng-content select="[footer]"></ng-content>
+  </nz-footer>
+</nz-layout>
