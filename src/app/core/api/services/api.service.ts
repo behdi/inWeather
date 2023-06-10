@@ -53,7 +53,7 @@ export class ApiService {
       apiKey: environment.WEATHER_API.API_KEY,
     });
 
-    return this._http.get<CurrentWeather[]>(url);
+    return this._http.get<CurrentWeather>(url);
   }
 
   /**
