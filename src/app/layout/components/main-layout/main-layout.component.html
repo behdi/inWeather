@@ -2,21 +2,32 @@
   <nz-header>
     <img class="logo" [src]="logo" alt="Logo" />
 
-    <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li
-        *ngFor="let item of menuItems"
-        nz-menu-item
-        [nzDisabled]="item.isDisabled"
-        [nzSelected]="item.isSelected"
-        [nzMatchRouter]="item.isMatchRouter"
-        [nzMatchRouterExact]="item.isMatchRouterExact"
+    <button
+      class="inline-menu"
+      nz-button
+      nzType="primary"
+      nz-dropdown
+      [nzDropdownMenu]="dropdownMenu"
+    >
+      <span nz-icon nzType="menu" nzTheme="outline"></span>
+      <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+        <ng-container
+          [ngTemplateOutlet]="mainMenu"
+          [ngTemplateOutletContext]="{ menuDirection: 'vertical' }"
+        >
+        </ng-container>
+      </nz-dropdown-menu>
+    </button>
+
+    <div class="menu">
+      <ng-container
+        [ngTemplateOutlet]="mainMenu"
+        [ngTemplateOutletContext]="{ menuDirection: 'horizontal' }"
       >
-        <a [routerLink]="item.routerLink">
-          {{ item.text }}
-        </a>
-      </li>
-    </ul>
+      </ng-container>
+    </div>
   </nz-header>
+
   <nz-content>
     <ng-content select="[content]"></ng-content>
   </nz-content>
@@ -24,3 +35,20 @@
     <ng-content select="[footer]"></ng-content>
   </nz-footer>
 </nz-layout>
+
+<ng-template #mainMenu let-menuDirection="menuDirection">
+  <ul nz-menu nzTheme="dark" [nzMode]="menuDirection">
+    <li
+      *ngFor="let item of menuItems"
+      nz-menu-item
+      [nzDisabled]="item.isDisabled"
+      [nzSelected]="item.isSelected"
+      [nzMatchRouter]="item.isMatchRouter"
+      [nzMatchRouterExact]="item.isMatchRouterExact"
+    >
+      <a [routerLink]="item.routerLink">
+        {{ item.text }}
+      </a>
+    </li>
+  </ul>
+</ng-template>

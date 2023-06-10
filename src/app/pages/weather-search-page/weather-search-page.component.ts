@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './weather-search-page.component.html',
-  styleUrls: ['./weather-search-page.component.less']
+  styleUrls: ['./weather-search-page.component.less'],
 })
-export class WeatherSearchPageComponent {
-
-}
+export class WeatherSearchPageComponent {}
