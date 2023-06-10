@@ -1,6 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "plugins": ["jsdoc"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -13,6 +14,9 @@
         "plugin:jsdoc/recommended",
         "plugin:prettier/recommended"
       ],
+      "parserOptions": {
+        "project": ["tsconfig.eslint.json"]
+      },
       "rules": {
         "@angular-eslint/no-empty-lifecycle-method": "warn",
         "jsdoc/require-jsdoc": [
