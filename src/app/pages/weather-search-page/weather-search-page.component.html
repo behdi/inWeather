@@ -1,1 +1,22 @@
-<p>weather-search-page works!</p>
+<div class="container">
+  <div class="card">
+    <div class="example-input">
+      <input
+        placeholder="input here"
+        nz-input
+        [formControl]="inputCtrl"
+        [nzAutocomplete]="auto"
+      />
+      <nz-autocomplete nzBackfill #auto>
+        <ng-container *ngFor="let option of options$ | async">
+          <nz-auto-option
+            [nzValue]="{ lat: option.lat, long: option.lon }"
+            [nzLabel]="option.name"
+          >
+            {{ option.name }}
+          </nz-auto-option>
+        </ng-container>
+      </nz-autocomplete>
+    </div>
+  </div>
+</div>
