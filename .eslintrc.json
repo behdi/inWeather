@@ -31,8 +31,15 @@
             }
           }
         ],
+        "jsdoc/tag-lines": 0,
         "jsdoc/require-param-type": 0,
         "jsdoc/require-returns-type": 0,
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ],
         "@typescript-eslint/no-unused-vars": [
           "warn",
           {

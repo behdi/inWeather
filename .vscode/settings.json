@@ -4,5 +4,6 @@
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "angular.log": "verbose"
+  "angular.log": "verbose",
+  "cSpell.words": ["Transloco"]
 }

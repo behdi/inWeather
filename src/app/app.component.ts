@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { TranslocoModule } from '@ngneat/transloco';
 
 /**
  * App component class.
@@ -9,7 +10,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NzCollapseModule],
+  imports: [CommonModule, RouterOutlet, NzCollapseModule, TranslocoModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
 })
