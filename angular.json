@@ -31,7 +31,14 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less"],
+            "styles": [
+              "src/theme/variables.less",
+              "src/theme/customize-ng-zorro.less",
+              "src/styles.less"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules/"]
+            },
             "scripts": []
           },
           "configurations": {
