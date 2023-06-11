@@ -1,40 +1,41 @@
 .weather-data,
 .no-data-notice,
 .loading-weather-data {
-  margin-top: 1rem;
+  margin-top: var(--inWeather-margin-sm);
 
   p {
     margin: 0;
-    color: #fafafa;
+    color: var(--inWeather-ui-weatherDisplay-fontColor);
   }
 }
-
-.loading-weather-data {
-  text-align: center;
-}
-
 .weather-data {
+  text-align: var(--inWeather-ui-weatherDisplay-textAlign);
+
   .weather-data-title {
-    font-size: 1.5rem;
+    font-size: var(--inWeather-fontSize-sm);
   }
 
   .weather-data-temp {
     font-weight: 800;
-    font-size: 2rem;
-    margin: 1rem 0;
+    font-size: var(--inWeather-fontSize-sm);
+    margin: var(--inWeather-margin-sm) 0;
   }
 
   .weather-condition-icon {
-    font-size: 1.5rem;
+    font-size: var(--inWeather-fontSize-sm);
     width: 2rem;
   }
 }
 
+.loading-weather-data {
+  text-align: var(--inWeather-ui-weatherDisplay-loadingTextAlign);
+}
+
 .no-data-notice {
-  text-align: center;
+  text-align: var(--inWeather-ui-weatherDisplay-noDataTextAlign);
 
   span[nz-icon] {
-    font-size: 2rem;
+    font-size: var(--inWeather-fontSize-md);
     margin-bottom: 0.5rem;
   }
 }

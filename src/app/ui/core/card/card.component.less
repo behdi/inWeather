@@ -4,18 +4,18 @@
 }
 
 .card {
-  width: 70%;
-  max-width: 500px;
-  background-color: #001529;
-  border-radius: 2rem;
+  width: var(--inWeather-ui-card-width);
+  max-width: var(--inWeather-ui-card-maxWidth);
+  background-color: var(--inWeather-ui-card-bgColor);
+  border-radius: var(--inWeather-border-radius-md);
   margin: auto;
-  padding: 2rem 4rem;
-  color: #fafafa;
+  padding: var(--inWeather-padding-md) var(--inWeather-padding-lg);
+  color: var(--inWeather-ui-card-fontColor);
 }
 
 @media screen and (max-width: 600px) {
   .card {
-    width: 90%;
-    padding: 3rem;
+    width: calc(var(--inWeather-ui-card-width) + 20%);
+    padding: var(--inWeather-padding-md);
   }
 }
