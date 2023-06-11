@@ -2,13 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ApiService, CurrentWeather } from '@inWeather/core';
+import { CardComponent, WeatherDisplayComponent } from '@inWeather/ui';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
   BehaviorSubject,
-  EMPTY,
   Observable,
   catchError,
   debounceTime,
@@ -19,7 +18,6 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { WeatherDisplayComponent } from 'src/app/ui';
 import { WeatherSearchOption } from './types/search-options.type';
 
 /**
@@ -33,8 +31,8 @@ import { WeatherSearchOption } from './types/search-options.type';
     ReactiveFormsModule,
     NzSelectModule,
     NzIconModule,
-    NzResultModule,
     TranslocoModule,
+    CardComponent,
     WeatherDisplayComponent,
   ],
   templateUrl: './weather-search-page.component.html',

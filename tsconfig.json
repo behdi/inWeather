@@ -10,7 +10,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "@inWeather/core": ["src/app/core/index.ts"]
+      "@inWeather/core": ["src/app/core/index.ts"],
+      "@inWeather/ui": ["src/app/ui/index.ts"]
     },
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

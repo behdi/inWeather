@@ -1,16 +1,20 @@
+:host ::ng-deep {
+  #city-selector nz-select-top-control {
+    border-radius: 2rem;
+  }
+}
+
+::ng-deep {
+  .weather-search-options nz-option-container {
+    border-radius: 1rem;
+  }
+}
+
 .container {
   display: flex;
   height: 100%;
-}
-
-.card {
-  width: 70%;
-  max-width: 500px;
-  background-color: #001529;
-  border-radius: 2rem;
-  margin: auto;
-  padding: 2rem 4rem;
-  color: #fafafa;
+  justify-content: center;
+  align-items: center;
 }
 
 nz-select {
@@ -19,22 +23,4 @@ nz-select {
 
 .search-icon {
   font-size: 1rem;
-}
-
-:host ::ng-deep {
-  #city-selector nz-select-top-control {
-    border-radius: 2rem;
-  }
-}
-::ng-deep {
-  .weather-search-options nz-option-container {
-    border-radius: 1rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .card {
-    width: 90%;
-    padding: 3rem;
-  }
 }
