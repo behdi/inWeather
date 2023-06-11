@@ -30,7 +30,10 @@
       </ng-template>
     </nz-select>
 
-    <div class="weather-data" *ngIf="weatherData$ | async as weatherData">
+    <div
+      class="weather-data"
+      *ngIf="weatherData$ | async as weatherData; else noData"
+    >
       <p class="weather-data-title">Weather in {{ weatherData.name }}</p>
 
       <p class="weather-data-temp">{{ weatherData.main.temp }} °C</p>
@@ -56,5 +59,20 @@
         Wind speed: {{ weatherData.wind.speed }} km/hr
       </p>
     </div>
+
+    <ng-template #noData>
+      <div class="no-data-notice">
+        <span
+          nz-icon
+          nzType="warning"
+          nzTheme="twotone"
+          [nzTwotoneColor]="'#faad14'"
+        ></span>
+        <p>
+          No location selected. Please choose a location to display weather data
+          for.
+        </p>
+      </div>
+    </ng-template>
   </div>
 </div>

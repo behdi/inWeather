@@ -4,7 +4,6 @@
 }
 
 .card {
-  min-height: 50%;
   width: 50%;
   background-color: #001529;
   border-radius: 2rem;
@@ -12,15 +11,17 @@
   padding: 2rem 4rem;
   color: #fafafa;
 }
-
-.weather-data {
+.weather-data,
+.no-data-notice {
   margin-top: 1rem;
 
   p {
     margin: 0;
     color: #fafafa;
   }
+}
 
+.weather-data {
   .weather-data-title {
     font-size: 1.5rem;
   }
@@ -33,6 +34,15 @@
   .weather-condition-icon {
     font-size: 1.5rem;
     width: 2rem;
+  }
+}
+
+.no-data-notice {
+  text-align: center;
+
+  span[nz-icon] {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
 }
 

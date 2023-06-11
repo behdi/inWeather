@@ -17,6 +17,7 @@ import {
   tap,
 } from 'rxjs';
 import { WeatherSearchOption } from './types/search-options.type';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 /**
  * Weather search page component class.
@@ -24,7 +25,13 @@ import { WeatherSearchOption } from './types/search-options.type';
 @Component({
   selector: 'app-weather-search-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NzSelectModule, NzIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NzSelectModule,
+    NzIconModule,
+    NzResultModule,
+  ],
   templateUrl: './weather-search-page.component.html',
   styleUrls: ['./weather-search-page.component.less'],
 })
