@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 import { MainLayoutComponent } from './main-layout.component';
 
 describe('MainLayoutComponent', () => {
@@ -8,7 +8,7 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MainLayoutComponent]
+      imports: [MainLayoutComponent, NzIconTestModule],
     });
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
