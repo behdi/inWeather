@@ -4,13 +4,13 @@
     "favoriteLocations": "Favorite Locations"
   },
   "weatherSearchPage": {
-    "searchBoxPlaceholder": "Search...",
-    "noData": "No location selected. Please choose a location to display weather data for.",
-    "weatherData": {
-      "generalInfo": "Weather in {{place}}",
-      "humidity": "Humidity:",
-      "windSpeed": "Wind speed:"
-    }
+    "searchBoxPlaceholder": "Search..."
+  },
+  "weatherDisplay": {
+    "generalInfo": "Weather in {{place}}",
+    "humidity": "Humidity:",
+    "windSpeed": "Wind speed:",
+    "noData": "No location selected. Please choose a location to display weather data for."
   },
   "general": {
     "loading": "Loading"

@@ -1,0 +1,39 @@
+<div class="weather-data" *ngIf="weatherData && !isLoadingWeatherData">
+  <p class="weather-data-title">
+    {{ "weatherDisplay.generalInfo" | transloco : { place: weatherData.name } }}
+  </p>
+  <p class="weather-data-temp">{{ weatherData.main.temp }} °C</p>
+  <p *ngIf="weatherData.weather[0] as condition" class="weather-condition">
+    <img
+      class="weather-condition-icon"
+      [src]="'https://openweathermap.org/img/wn/' + condition.icon + '.png'"
+      [alt]="condition.description"
+    />
+    {{ condition.main }}
+  </p>
+  <p class="weather-data-humidity">
+    {{ "weatherDisplay.humidity" | transloco }}
+    {{ weatherData.main.humidity }}%
+  </p>
+  <p class="weather-data-wind-speed">
+    {{ "weatherDisplay.windSpeed" | transloco }}
+    {{ weatherData.wind.speed }} km/hr
+  </p>
+</div>
+
+<div *ngIf="isLoadingWeatherData" class="loading-weather-data">
+  <span nz-icon nzType="loading" class="loading-icon"></span>
+  {{ "general.loading" | transloco }}
+</div>
+
+<div *ngIf="!weatherData && !isLoadingWeatherData" class="no-data-notice">
+  <span
+    nz-icon
+    nzType="warning"
+    nzTheme="twotone"
+    [nzTwotoneColor]="'#faad14'"
+  ></span>
+  <p>
+    {{ "weatherDisplay.noData" | transloco }}
+  </p>
+</div>

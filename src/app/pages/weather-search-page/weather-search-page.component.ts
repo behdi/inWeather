@@ -2,10 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ApiService, CurrentWeather } from '@inWeather/core';
+import { TranslocoModule } from '@ngneat/transloco';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
   BehaviorSubject,
+  EMPTY,
   Observable,
   catchError,
   debounceTime,
@@ -16,9 +19,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
+import { WeatherDisplayComponent } from 'src/app/ui';
 import { WeatherSearchOption } from './types/search-options.type';
-import { NzResultModule } from 'ng-zorro-antd/result';
-import { TranslocoModule } from '@ngneat/transloco';
 
 /**
  * Weather search page component class.
@@ -33,6 +35,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     NzIconModule,
     NzResultModule,
     TranslocoModule,
+    WeatherDisplayComponent,
   ],
   templateUrl: './weather-search-page.component.html',
   styleUrls: ['./weather-search-page.component.less'],
@@ -49,9 +52,14 @@ export class WeatherSearchPageComponent implements OnInit {
   searchChange$ = new BehaviorSubject<string | null>(null);
 
   /**
-   * Is loading indicator.
+   * Is loading options indicator.
    */
-  isLoading = false;
+  isLoadingOptions = false;
+
+  /**
+   * Is loading weather data indicator.
+   */
+  isLoadingWeatherData = false;
 
   /**
    * Has error indicator.
@@ -95,7 +103,7 @@ export class WeatherSearchPageComponent implements OnInit {
     if (!value) return;
 
     this.hasError = false;
-    this.isLoading = true;
+    this.isLoadingOptions = true;
     this.searchChange$.next(value);
   }
 
@@ -120,7 +128,7 @@ export class WeatherSearchPageComponent implements OnInit {
       map((data) =>
         data.map((d) => ({ value: { lat: d.lat, lon: d.lon }, text: d.name }))
       ),
-      tap(() => (this.isLoading = false))
+      tap(() => (this.isLoadingOptions = false))
     );
   }
 
@@ -132,12 +140,13 @@ export class WeatherSearchPageComponent implements OnInit {
   private _getLocationWeatherDataStream() {
     return this.searchInputCtrl.valueChanges.pipe(
       filter((data): data is WeatherSearchOption['value'] => data !== null),
+      tap(() => (this.isLoadingWeatherData = true)),
       switchMap((data) => {
-        return this._api.getCurrentWeather(
-          data.lat.toString(),
-          data.lon.toString()
-        );
-      })
+        const { lat, lon } = data;
+
+        return this._api.getCurrentWeather(lat.toString(), lon.toString());
+      }),
+      tap(() => (this.isLoadingWeatherData = false))
     );
   }
 }
