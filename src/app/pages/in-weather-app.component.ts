@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TranslocoModule, translate } from '@ngneat/transloco';
 import { MainLayoutComponent, MenuItem } from '../layout';
 
 /**
@@ -9,14 +10,14 @@ import { MainLayoutComponent, MenuItem } from '../layout';
 @Component({
   selector: 'app-in-weather-app',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MainLayoutComponent],
+  imports: [CommonModule, RouterOutlet, MainLayoutComponent, TranslocoModule],
   templateUrl: './in-weather-app.component.html',
   styleUrls: ['./in-weather-app.component.less'],
 })
 export class InWeatherAppComponent {
   menuItems: MenuItem[] = [
     {
-      text: 'Home',
+      text: translate('menu.home'),
       routerLink: '/search',
       isDisabled: false,
       isSelected: false,
@@ -24,7 +25,7 @@ export class InWeatherAppComponent {
       isMatchRouterExact: true,
     },
     {
-      text: 'Favorite Locations',
+      text: translate('menu.favoriteLocations'),
       routerLink: '/fav',
       isDisabled: false,
       isSelected: false,

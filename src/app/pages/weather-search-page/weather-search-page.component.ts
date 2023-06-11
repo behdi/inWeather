@@ -18,6 +18,7 @@ import {
 } from 'rxjs';
 import { WeatherSearchOption } from './types/search-options.type';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { TranslocoModule } from '@ngneat/transloco';
 
 /**
  * Weather search page component class.
@@ -31,6 +32,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzSelectModule,
     NzIconModule,
     NzResultModule,
+    TranslocoModule,
   ],
   templateUrl: './weather-search-page.component.html',
   styleUrls: ['./weather-search-page.component.less'],

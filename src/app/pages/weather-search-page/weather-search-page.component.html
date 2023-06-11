@@ -4,7 +4,7 @@
       id="city-selector"
       nzShowSearch
       nzServerSearch
-      nzPlaceHolder="Search..."
+      [nzPlaceHolder]="'weatherSearchPage.searchBoxPlaceholder' | transloco"
       [formControl]="searchInputCtrl"
       [nzShowArrow]="true"
       [nzDropdownClassName]="'weather-search-options'"
@@ -21,7 +21,7 @@
       </ng-container>
       <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
         <span nz-icon nzType="loading" class="loading-icon"></span>
-        Loading...
+        {{ "general.loading" | transloco }}
       </nz-option>
       <ng-template #suffixIcon>
         <div class="search-icon">
@@ -34,29 +34,29 @@
       class="weather-data"
       *ngIf="weatherData$ | async as weatherData; else noData"
     >
-      <p class="weather-data-title">Weather in {{ weatherData.name }}</p>
+      <p class="weather-data-title">
+        {{
+          "weatherSearchPage.weatherData.generalInfo"
+            | transloco : { place: weatherData.name }
+        }}
+      </p>
 
       <p class="weather-data-temp">{{ weatherData.main.temp }} °C</p>
-      <p
-        *ngIf="weatherData.weather[0].main as condition"
-        class="weather-condition"
-      >
+      <p *ngIf="weatherData.weather[0] as condition" class="weather-condition">
         <img
           class="weather-condition-icon"
-          [src]="
-            'https://openweathermap.org/img/wn/' +
-            weatherData.weather[0].icon +
-            '.png'
-          "
-          [alt]="condition"
+          [src]="'https://openweathermap.org/img/wn/' + condition.icon + '.png'"
+          [alt]="condition.description"
         />
-        {{ condition }}
+        {{ condition.main }}
       </p>
       <p class="weather-data-humidity">
-        Humidity: {{ weatherData.main.humidity }}%
+        {{ "weatherSearchPage.weatherData.humidity" | transloco }}
+        {{ weatherData.main.humidity }}%
       </p>
       <p class="weather-data-wind-speed">
-        Wind speed: {{ weatherData.wind.speed }} km/hr
+        {{ "weatherSearchPage.weatherData.windSpeed" | transloco }}
+        {{ weatherData.wind.speed }} km/hr
       </p>
     </div>
 
@@ -69,8 +69,7 @@
           [nzTwotoneColor]="'#faad14'"
         ></span>
         <p>
-          No location selected. Please choose a location to display weather data
-          for.
+          {{ "weatherSearchPage.noData" | transloco }}
         </p>
       </div>
     </ng-template>

@@ -14,8 +14,10 @@ import {
   TranslocoConfig,
   TranslocoLoader,
   TranslocoModule,
+  TranslocoService,
   translocoConfig,
 } from '@ngneat/transloco';
+import { lastValueFrom } from 'rxjs';
 
 /**
  * Transloco Http Loader service.
@@ -54,3 +56,16 @@ export const provideTransloco = (
     { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader },
   ]);
 };
+
+/**
+ * Preloads user's language.
+ *
+ * @param transloco - transloco service
+ * @returns promise with loaded language json file
+ */
+export function preloadUserLanguage(transloco: TranslocoService) {
+  return function () {
+    transloco.setActiveLang('en');
+    return lastValueFrom(transloco.load('en'));
+  };
+}
