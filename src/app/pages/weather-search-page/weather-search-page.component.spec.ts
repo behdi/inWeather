@@ -8,7 +8,7 @@ describe('WeatherSearchPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [WeatherSearchPageComponent]
+      imports: [WeatherSearchPageComponent],
     });
     fixture = TestBed.createComponent(WeatherSearchPageComponent);
     component = fixture.componentInstance;

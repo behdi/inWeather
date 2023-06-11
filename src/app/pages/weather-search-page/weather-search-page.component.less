@@ -10,8 +10,27 @@
   opacity: 0.8;
   border-radius: 2rem;
   margin: auto;
-  padding: 4.5rem;
+  padding: 2rem 4rem;
   color: #fafafa;
+}
+
+nz-select {
+  width: 100%;
+}
+
+.search-icon {
+  font-size: 1rem;
+}
+
+:host ::ng-deep {
+  #city-selector nz-select-top-control {
+    border-radius: 2rem;
+  }
+}
+::ng-deep {
+  .weather-search-options nz-option-container {
+    border-radius: 1rem;
+  }
 }
 
 @media screen and (max-width: 600px) {

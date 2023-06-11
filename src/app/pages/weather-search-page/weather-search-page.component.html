@@ -1,22 +1,33 @@
 <div class="container">
   <div class="card">
-    <div class="example-input">
-      <input
-        placeholder="input here"
-        nz-input
-        [formControl]="inputCtrl"
-        [nzAutocomplete]="auto"
-      />
-      <nz-autocomplete nzBackfill #auto>
-        <ng-container *ngFor="let option of options$ | async">
-          <nz-auto-option
-            [nzValue]="{ lat: option.lat, long: option.lon }"
-            [nzLabel]="option.name"
-          >
-            {{ option.name }}
-          </nz-auto-option>
-        </ng-container>
-      </nz-autocomplete>
-    </div>
+    <nz-select
+      id="city-selector"
+      nzShowSearch
+      nzServerSearch
+      nzPlaceHolder="Search..."
+      [formControl]="searchInputCtrl"
+      [nzShowArrow]="true"
+      [nzDropdownClassName]="'weather-search-options'"
+      [nzSuffixIcon]="suffixIcon"
+      [nzStatus]="hasError ? 'error' : ''"
+      (nzOnSearch)="onSearchChange($event)"
+    >
+      <ng-container *ngIf="optionList$ | async as options">
+        <nz-option
+          *ngFor="let opt of options"
+          [nzLabel]="opt.text"
+          [nzValue]="opt.value"
+        ></nz-option>
+      </ng-container>
+      <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+        <span nz-icon nzType="loading" class="loading-icon"></span>
+        Loading...
+      </nz-option>
+      <ng-template #suffixIcon>
+        <div class="search-icon">
+          <span nz-icon nzType="search"></span>
+        </div>
+      </ng-template>
+    </nz-select>
   </div>
 </div>

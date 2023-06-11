@@ -47,6 +47,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules/"]
             },
+            "allowedCommonJsDependencies": ["flat"],
             "scripts": []
           },
           "configurations": {
