@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeatherDisplayComponent } from './weather-display.component';
+import { TranslocoModule } from '@ngneat/transloco';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 describe('WeatherDisplayComponent', () => {
   let component: WeatherDisplayComponent;
@@ -8,7 +10,7 @@ describe('WeatherDisplayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [WeatherDisplayComponent]
+      imports: [WeatherDisplayComponent, TranslocoModule, NzIconModule],
     });
     fixture = TestBed.createComponent(WeatherDisplayComponent);
     component = fixture.componentInstance;

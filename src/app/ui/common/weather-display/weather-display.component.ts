@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslocoModule } from '@ngneat/transloco';
+import { Component, Input } from '@angular/core';
 import { CurrentWeather } from '@inWeather/core';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslocoModule } from '@ngneat/transloco';
+import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 
 /**
  * Weather display class component.
@@ -10,7 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-weather-display',
   standalone: true,
-  imports: [CommonModule, TranslocoModule, NzIconModule],
+  imports: [CommonModule, TranslocoModule, NzIconTestModule],
   templateUrl: './weather-display.component.html',
   styleUrls: ['./weather-display.component.less'],
 })
