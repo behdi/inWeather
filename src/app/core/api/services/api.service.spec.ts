@@ -82,7 +82,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'http://api.openweathermap.org/geo/1.0/direct?q=tehran&limit=5&appid=7b4fa149865448cc62b6357bdd351382'
+        'https://api.openweathermap.org/geo/1.0/direct?q=tehran&limit=5&appid=7b4fa149865448cc62b6357bdd351382'
       );
     });
 
@@ -177,7 +177,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'http://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&units=imperial&appid=7b4fa149865448cc62b6357bdd351382'
+        'https://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&units=imperial&appid=7b4fa149865448cc62b6357bdd351382'
       );
     });
 

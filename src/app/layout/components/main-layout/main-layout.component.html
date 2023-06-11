@@ -2,30 +2,31 @@
   <nz-header>
     <img class="logo" [src]="logo" alt="Logo" />
 
-    <button
-      class="inline-menu"
-      nz-button
-      nzType="primary"
-      nz-dropdown
-      [nzDropdownMenu]="dropdownMenu"
-    >
-      <span nz-icon nzType="menu" nzTheme="outline"></span>
-      <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+    <ng-container *ngIf="menuItems">
+      <button
+        class="inline-menu"
+        nz-button
+        nzType="primary"
+        nz-dropdown
+        [nzDropdownMenu]="dropdownMenu"
+      >
+        <span nz-icon nzType="menu" nzTheme="outline"></span>
+        <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+          <ng-container
+            [ngTemplateOutlet]="mainMenu"
+            [ngTemplateOutletContext]="{ menuDirection: 'vertical' }"
+          >
+          </ng-container>
+        </nz-dropdown-menu>
+      </button>
+      <div class="menu">
         <ng-container
           [ngTemplateOutlet]="mainMenu"
-          [ngTemplateOutletContext]="{ menuDirection: 'vertical' }"
+          [ngTemplateOutletContext]="{ menuDirection: 'horizontal' }"
         >
         </ng-container>
-      </nz-dropdown-menu>
-    </button>
-
-    <div class="menu">
-      <ng-container
-        [ngTemplateOutlet]="mainMenu"
-        [ngTemplateOutletContext]="{ menuDirection: 'horizontal' }"
-      >
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </nz-header>
 
   <nz-content>
