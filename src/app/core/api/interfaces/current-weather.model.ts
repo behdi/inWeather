@@ -163,12 +163,12 @@ export interface WeatherData {
   /**
    * Atmospheric pressure on the sea level, hPa.
    */
-  sea_level: number;
+  sea_level?: number;
 
   /**
    * Atmospheric pressure on the ground level, hPa.
    */
-  grnd_level: number;
+  grnd_level?: number;
 }
 
 export interface WindData {
@@ -197,7 +197,7 @@ export interface WindData {
    *        `Metric`: meter/sec,
    *        `Imperial`: miles/hour.
    */
-  gust: number;
+  gust?: number;
 }
 
 export interface RainData {
