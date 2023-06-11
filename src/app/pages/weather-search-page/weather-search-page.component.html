@@ -30,19 +30,19 @@
       </ng-template>
     </nz-select>
 
-    <div class="weather-data">
-      <p class="weather-data-title">Weather in {{ sampleData.name }}</p>
+    <div class="weather-data" *ngIf="weatherData$ | async as weatherData">
+      <p class="weather-data-title">Weather in {{ weatherData.name }}</p>
 
-      <p class="weather-data-temp">{{ sampleData.main.temp }} °C</p>
+      <p class="weather-data-temp">{{ weatherData.main.temp }} °C</p>
       <p
-        *ngIf="sampleData.weather[0].main as condition"
+        *ngIf="weatherData.weather[0].main as condition"
         class="weather-condition"
       >
         <img
           class="weather-condition-icon"
           [src]="
             'https://openweathermap.org/img/wn/' +
-            sampleData.weather[0].icon +
+            weatherData.weather[0].icon +
             '.png'
           "
           [alt]="condition"
@@ -50,10 +50,10 @@
         {{ condition }}
       </p>
       <p class="weather-data-humidity">
-        Humidity: {{ sampleData.main.humidity }}%
+        Humidity: {{ weatherData.main.humidity }}%
       </p>
       <p class="weather-data-wind-speed">
-        Wind speed: {{ sampleData.wind.speed }} km/hr
+        Wind speed: {{ weatherData.wind.speed }} km/hr
       </p>
     </div>
   </div>

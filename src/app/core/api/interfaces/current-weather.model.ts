@@ -80,7 +80,7 @@ export interface CurrentWeather {
   cod: number;
 }
 
-export interface WeatherCondition {
+interface WeatherCondition {
   /**
    * Weather condition id.
    */
@@ -105,7 +105,7 @@ export interface WeatherCondition {
   icon: string;
 }
 
-export type WeatherConditionGroup =
+type WeatherConditionGroup =
   | 'Thunderstorm'
   | 'Drizzle'
   | 'Rain'
@@ -122,7 +122,7 @@ export type WeatherConditionGroup =
   | 'Clear'
   | 'Clouds';
 
-export interface WeatherData {
+interface WeatherData {
   /**
    * Temperature
    *
@@ -171,7 +171,7 @@ export interface WeatherData {
   grnd_level?: number;
 }
 
-export interface WindData {
+interface WindData {
   /**
    * Wind speed.
    *
@@ -200,7 +200,7 @@ export interface WindData {
   gust?: number;
 }
 
-export interface RainData {
+interface RainData {
   /**
    * Rain volume for the last 1 hour, mm.
    */
@@ -212,7 +212,7 @@ export interface RainData {
   ['3h']?: number;
 }
 
-export interface SnowData {
+interface SnowData {
   /**
    * Snow volume for the last 1 hour, mm.
    */
@@ -224,7 +224,7 @@ export interface SnowData {
   ['3h']?: number;
 }
 
-export interface WeatherSystemData {
+interface WeatherSystemData {
   /**
    * Internal parameter used by OpenWeather.
    */

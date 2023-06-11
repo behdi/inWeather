@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ApiService, CurrentWeather } from '@inWeather/core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
   BehaviorSubject,
@@ -16,7 +17,6 @@ import {
   tap,
 } from 'rxjs';
 import { WeatherSearchOption } from './types/search-options.type';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 /**
  * Weather search page component class.
@@ -64,65 +64,17 @@ export class WeatherSearchPageComponent implements OnInit {
    */
   searchInputCtrl = new FormControl<WeatherSearchOption['value'] | null>(null);
 
-  sampleData: CurrentWeather = {
-    coord: {
-      lon: 51.3896,
-      lat: 35.6893,
-    },
-    weather: [
-      {
-        id: 802,
-        main: 'Clouds',
-        description: 'scattered clouds',
-        icon: '03d',
-      },
-    ],
-    base: 'stations',
-    main: {
-      temp: 27.73,
-      feels_like: 26.59,
-      temp_min: 27.73,
-      temp_max: 28.1,
-      pressure: 1012,
-      humidity: 21,
-    },
-    visibility: 10000,
-    wind: {
-      speed: 4.12,
-      deg: 140,
-    },
-    clouds: {
-      all: 40,
-    },
-    dt: 1686460119,
-    sys: {
-      type: 2,
-      id: 47737,
-      country: 'IR',
-      sunrise: 1686446292,
-      sunset: 1686498598,
-    },
-    timezone: 12600,
-    id: 112931,
-    name: 'Tehran',
-    cod: 200,
-  };
+  /**
+   * Weather data for selected location.
+   */
+  weatherData$?: Observable<CurrentWeather>;
 
   /**
    * Component onInit hook.
    */
   ngOnInit(): void {
     this.optionList$ = this._getOptionsListStream();
-    // this.searchInputCtrl.valueChanges
-    //   .pipe(
-    //     switchMap((res) => {
-    //       return this._api.getCurrentWeather(
-    //         res!.lat.toString(),
-    //         res!.lon.toString()
-    //       );
-    //     })
-    //   )
-    //   .subscribe(console.log);
+    this.weatherData$ = this._getLocationWeatherDataStream();
   }
 
   /**
@@ -160,6 +112,23 @@ export class WeatherSearchPageComponent implements OnInit {
         data.map((d) => ({ value: { lat: d.lat, lon: d.lon }, text: d.name }))
       ),
       tap(() => (this.isLoading = false))
+    );
+  }
+
+  /**
+   * Listens to selected location and returns weather data for it.
+   *
+   * @returns stream containing weather info for selected location.
+   */
+  private _getLocationWeatherDataStream() {
+    return this.searchInputCtrl.valueChanges.pipe(
+      filter((data): data is WeatherSearchOption['value'] => data !== null),
+      switchMap((data) => {
+        return this._api.getCurrentWeather(
+          data.lat.toString(),
+          data.lon.toString()
+        );
+      })
     );
   }
 }
