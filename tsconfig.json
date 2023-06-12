@@ -11,7 +11,8 @@
     "noImplicitReturns": true,
     "paths": {
       "@inWeather/core": ["src/app/core/index.ts"],
-      "@inWeather/ui": ["src/app/ui/index.ts"]
+      "@inWeather/ui": ["src/app/ui/index.ts"],
+      "@inWeather/utils": ["src/app/utils/index.ts"]
     },
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

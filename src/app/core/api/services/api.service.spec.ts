@@ -15,7 +15,6 @@ describe('ApiServiceService', () => {
   let httpClient: HttpTestingController;
 
   const baseUrl = mockAppConfig.WEATHER_API.BASE_URL;
-  const apiKey = mockAppConfig.WEATHER_API.API_KEY;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -76,7 +75,6 @@ describe('ApiServiceService', () => {
       const url = service.getURL(GEO_CODING_ENDPOINTS.DIRECT, {
         cityName: cityName,
         limit: limit.toString(),
-        apiKey: apiKey,
       });
 
       return httpClient.expectOne({
@@ -91,7 +89,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'https://test.weather.com/geo/1.0/direct?q=tehran&limit=5&appid=1234'
+        'https://test.weather.com/geo/1.0/direct?q=tehran&limit=5'
       );
     });
 
@@ -172,7 +170,6 @@ describe('ApiServiceService', () => {
         lat,
         lon,
         units,
-        apiKey: apiKey,
       });
 
       return httpClient.expectOne({
@@ -186,7 +183,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'https://test.weather.com/data/2.5/weather?lat=0&lon=0&units=imperial&appid=1234'
+        'https://test.weather.com/data/2.5/weather?lat=0&lon=0&units=imperial'
       );
     });
 

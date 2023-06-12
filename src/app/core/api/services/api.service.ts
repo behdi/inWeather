@@ -28,7 +28,6 @@ export class ApiService {
     const url = this.getURL(GEO_CODING_ENDPOINTS.DIRECT, {
       cityName,
       limit: limit.toString(),
-      apiKey: this._config.WEATHER_API.API_KEY,
     });
 
     return this._http.get<GeoData[]>(url);
@@ -51,7 +50,6 @@ export class ApiService {
       lat,
       lon,
       units,
-      apiKey: this._config.WEATHER_API.API_KEY,
     });
 
     return this._http.get<CurrentWeather>(url);

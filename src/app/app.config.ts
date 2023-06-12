@@ -11,9 +11,9 @@ import { provideRouter } from '@angular/router';
 import { NZ_I18N, en_GB } from 'ng-zorro-antd/i18n';
 import { routes } from './app.routes';
 import { preloadUserLanguage, provideTransloco } from './provide-transloco';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TranslocoService } from '@ngneat/transloco';
-import { APP_CONFIG, DEFAULT_APP_CONFIG } from './core';
+import { APP_CONFIG, DEFAULT_APP_CONFIG, apiKeyInterceptor } from './core';
 import { environment } from 'src/environments/environment.development';
 
 registerLocaleData(en);
@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: NZ_I18N, useValue: en_GB },
     provideTransloco(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([apiKeyInterceptor])),
     {
       provide: APP_INITIALIZER,
       multi: true,
