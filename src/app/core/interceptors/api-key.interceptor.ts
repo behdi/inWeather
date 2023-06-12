@@ -9,11 +9,13 @@ export const apiKeyInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.includes(weatherApiConfig.BASE_URL)) {
     return next(req);
   }
+
   const hasQueryParams = hasExistingQueryParams(req.url);
   const urlWithKey = `${req.url}${hasQueryParams ? '&' : '?'}appid=${
     weatherApiConfig.API_KEY
   }`;
   const modifiedReq = req.clone({ url: urlWithKey });
+
   return next(modifiedReq);
 };
 

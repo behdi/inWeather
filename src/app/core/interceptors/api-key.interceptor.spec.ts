@@ -39,6 +39,7 @@ describe('ApiKeyInterceptor', () => {
     };
     mockHandlerSpy = spyOn(mockHandler, 'handle');
   });
+
   it(`should return same req if url is not from weather api`, () => {
     const httpReq = constructHttpReq('https://google.com/somewhere');
 
@@ -50,22 +51,24 @@ describe('ApiKeyInterceptor', () => {
   it(`should append API key to urls queryparams if url is equal to weather api and has existing queryparams`, () => {
     const url = `${mockAppConfig.WEATHER_API.BASE_URL}/anytime?where=here`;
     const httpReq = constructHttpReq(url);
-
     const modifiedReq = httpReq.clone({
       url: `${url}&appid=${mockAppConfig.WEATHER_API.API_KEY}`,
     });
+
     runInterceptor(httpReq, mockHandler.handle);
+
     expect(mockHandlerSpy).toHaveBeenCalledOnceWith(modifiedReq);
   });
 
   it(`should append API key as a query param to url if url is equal to weather api`, () => {
     const url = `${mockAppConfig.WEATHER_API.BASE_URL}/anytime`;
     const httpReq = constructHttpReq(url);
-
     const modifiedReq = httpReq.clone({
       url: `${url}?appid=${mockAppConfig.WEATHER_API.API_KEY}`,
     });
+
     runInterceptor(httpReq, mockHandler.handle);
+
     expect(mockHandlerSpy).toHaveBeenCalledOnceWith(modifiedReq);
   });
 });
