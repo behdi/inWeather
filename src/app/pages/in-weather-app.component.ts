@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoModule, translate } from '@ngneat/transloco';
 import { MainLayoutComponent, MenuItem } from '../layout';
+import { APP_CONFIG } from '../core/app';
 
 /**
  * InWeather Application class component.
@@ -15,6 +16,16 @@ import { MainLayoutComponent, MenuItem } from '../layout';
   styleUrls: ['./in-weather-app.component.less'],
 })
 export class InWeatherAppComponent {
+  private readonly _appConfig = inject(APP_CONFIG);
+
+  /**
+   * Url for the logo.
+   */
+  logoUrl = this._appConfig.PROJECT.LOGO_URL;
+
+  /**
+   * Menu items that should be rendered.
+   */
   menuItems: MenuItem[] = [
     {
       text: translate('menu.home'),

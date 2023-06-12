@@ -3,6 +3,8 @@ import { WeatherSearchPageComponent } from './weather-search-page.component';
 import { TranslocoTestingModule } from '@ngneat/transloco';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { APP_CONFIG } from '@inWeather/core';
+import { mockAppConfig } from 'src/app/utils';
 
 describe('WeatherSearchPageComponent', () => {
   let component: WeatherSearchPageComponent;
@@ -17,6 +19,12 @@ describe('WeatherSearchPageComponent', () => {
         }),
         HttpClientTestingModule,
         NoopAnimationsModule,
+      ],
+      providers: [
+        {
+          provide: APP_CONFIG,
+          useValue: mockAppConfig,
+        },
       ],
     });
     fixture = TestBed.createComponent(WeatherSearchPageComponent);

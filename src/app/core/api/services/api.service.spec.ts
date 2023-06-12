@@ -4,21 +4,30 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
-import { environment } from 'src/environments/environment.development';
 import { GEO_CODING_ENDPOINTS, WEATHER_ENDPOINTS } from '../models';
 import { GeoData } from '../interfaces';
 import { CurrentWeather } from '../interfaces/current-weather.model';
+import { APP_CONFIG } from '../../app';
+import { mockAppConfig } from 'src/app/utils';
 
 describe('ApiServiceService', () => {
   let service: ApiService;
   let httpClient: HttpTestingController;
 
-  const baseUrl = environment.WEATHER_API.BASE_URL;
+  const baseUrl = mockAppConfig.WEATHER_API.BASE_URL;
+  const apiKey = mockAppConfig.WEATHER_API.API_KEY;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: APP_CONFIG,
+          useValue: mockAppConfig,
+        },
+      ],
     });
+
     httpClient = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ApiService);
   });
@@ -67,7 +76,7 @@ describe('ApiServiceService', () => {
       const url = service.getURL(GEO_CODING_ENDPOINTS.DIRECT, {
         cityName: cityName,
         limit: limit.toString(),
-        apiKey: environment.WEATHER_API.API_KEY,
+        apiKey: apiKey,
       });
 
       return httpClient.expectOne({
@@ -82,7 +91,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'https://api.openweathermap.org/geo/1.0/direct?q=tehran&limit=5&appid=7b4fa149865448cc62b6357bdd351382'
+        'https://test.weather.com/geo/1.0/direct?q=tehran&limit=5&appid=1234'
       );
     });
 
@@ -163,7 +172,7 @@ describe('ApiServiceService', () => {
         lat,
         lon,
         units,
-        apiKey: environment.WEATHER_API.API_KEY,
+        apiKey: apiKey,
       });
 
       return httpClient.expectOne({
@@ -177,7 +186,7 @@ describe('ApiServiceService', () => {
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'https://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&units=imperial&appid=7b4fa149865448cc62b6357bdd351382'
+        'https://test.weather.com/data/2.5/weather?lat=0&lon=0&units=imperial&appid=1234'
       );
     });
 
