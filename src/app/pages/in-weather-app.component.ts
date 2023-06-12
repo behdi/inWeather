@@ -27,7 +27,7 @@ export class InWeatherAppComponent {
     {
       text: translate('menu.favoriteLocations'),
       routerLink: '/fav',
-      isDisabled: false,
+      isDisabled: true,
       isSelected: false,
       isMatchRouter: true,
       isMatchRouterExact: true,
