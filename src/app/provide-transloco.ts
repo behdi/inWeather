@@ -18,6 +18,7 @@ import {
   translocoConfig,
 } from '@ngneat/transloco';
 import { lastValueFrom } from 'rxjs';
+import { APP_CONFIG } from './core';
 
 /**
  * Transloco Http Loader service.
@@ -39,19 +40,20 @@ export class TranslocoHttpLoader implements TranslocoLoader {
   }
 }
 
-export const provideTransloco = (
-  config: Partial<TranslocoConfig>
-): EnvironmentProviders => {
+export const provideTransloco = (): EnvironmentProviders => {
   return makeEnvironmentProviders([
     importProvidersFrom(TranslocoModule),
     {
       provide: TRANSLOCO_CONFIG,
-      useValue: translocoConfig({
-        availableLangs: config.availableLangs,
-        defaultLang: config.defaultLang,
-        reRenderOnLangChange: true,
-        prodMode: !isDevMode(),
-      }),
+      useFactory: () => {
+        const { PROJECT } = inject(APP_CONFIG);
+        return translocoConfig({
+          availableLangs: PROJECT.AVAILABLE_LANGUAGES,
+          defaultLang: PROJECT.DEFAULT_LANG,
+          reRenderOnLangChange: true,
+          prodMode: !isDevMode(),
+        });
+      },
     },
     { provide: TRANSLOCO_LOADER, useClass: TranslocoHttpLoader },
   ]);
@@ -64,8 +66,10 @@ export const provideTransloco = (
  * @returns promise with loaded language json file
  */
 export function preloadUserLanguage(transloco: TranslocoService) {
+  const { PROJECT } = inject(APP_CONFIG);
+
   return function () {
-    transloco.setActiveLang('en');
-    return lastValueFrom(transloco.load('en'));
+    transloco.setActiveLang(PROJECT.DEFAULT_LANG);
+    return lastValueFrom(transloco.load(PROJECT.DEFAULT_LANG));
   };
 }

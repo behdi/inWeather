@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { APP_CONFIG } from '../../app';
 import { GeoData } from '../interfaces';
-import { GEO_CODING_ENDPOINTS, WEATHER_ENDPOINTS } from '../models';
 import { CurrentWeather } from '../interfaces/current-weather.model';
+import { GEO_CODING_ENDPOINTS, WEATHER_ENDPOINTS } from '../models';
 
 /**
  * API service
@@ -14,6 +14,7 @@ import { CurrentWeather } from '../interfaces/current-weather.model';
   providedIn: 'root',
 })
 export class ApiService {
+  private readonly _config = inject(APP_CONFIG);
   private readonly _http = inject(HttpClient);
 
   /**
@@ -27,7 +28,7 @@ export class ApiService {
     const url = this.getURL(GEO_CODING_ENDPOINTS.DIRECT, {
       cityName,
       limit: limit.toString(),
-      apiKey: environment.WEATHER_API.API_KEY,
+      apiKey: this._config.WEATHER_API.API_KEY,
     });
 
     return this._http.get<GeoData[]>(url);
@@ -50,7 +51,7 @@ export class ApiService {
       lat,
       lon,
       units,
-      apiKey: environment.WEATHER_API.API_KEY,
+      apiKey: this._config.WEATHER_API.API_KEY,
     });
 
     return this._http.get<CurrentWeather>(url);
@@ -103,6 +104,6 @@ export class ApiService {
    * @returns  base url endpoint
    */
   private get _baseUrl(): string {
-    return environment.WEATHER_API.BASE_URL;
+    return this._config.WEATHER_API.BASE_URL;
   }
 }

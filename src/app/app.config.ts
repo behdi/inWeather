@@ -13,6 +13,8 @@ import { routes } from './app.routes';
 import { preloadUserLanguage, provideTransloco } from './provide-transloco';
 import { provideHttpClient } from '@angular/common/http';
 import { TranslocoService } from '@ngneat/transloco';
+import { APP_CONFIG, DEFAULT_APP_CONFIG } from './core';
+import { environment } from 'src/environments/environment.development';
 
 registerLocaleData(en);
 
@@ -20,8 +22,15 @@ export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom([BrowserModule, BrowserAnimationsModule]),
     provideRouter(routes),
+    {
+      provide: APP_CONFIG,
+      useValue: {
+        ...DEFAULT_APP_CONFIG,
+        ...environment,
+      },
+    },
     { provide: NZ_I18N, useValue: en_GB },
-    provideTransloco({ availableLangs: ['en'], defaultLang: 'en' }),
+    provideTransloco(),
     provideHttpClient(),
     {
       provide: APP_INITIALIZER,
