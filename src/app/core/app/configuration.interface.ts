@@ -37,6 +37,8 @@ export interface AppConfig {
   WEATHER_API: {
     /**
      * Base URL for the API.
+     *
+     * Note: Do not add a trailing / to the end of the url.
      */
     BASE_URL: string;
 
