@@ -1,3 +1,15 @@
+:host ::ng-deep {
+  .ant-switch:not(.ant-switch-checked) {
+    background: var(--inWeather-unitSwitch-imperial-color);
+  }
+}
+
+.weather-data-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .weather-data,
 .no-data-notice,
 .loading-weather-data {
@@ -8,6 +20,7 @@
     color: var(--inWeather-ui-weatherDisplay-fontColor);
   }
 }
+
 .weather-data {
   text-align: var(--inWeather-ui-weatherDisplay-textAlign);
 

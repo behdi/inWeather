@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { MeasurementSystem } from '../models';
 
 /**
  * App Environment.
@@ -29,6 +30,11 @@ export interface AppConfig {
      * App's default language.
      */
     DEFAULT_LANG: string;
+
+    /**
+     * Default measurement system in the app.
+     */
+    MEASUREMENT_SYSTEM: MeasurementSystem;
   };
 
   /**
@@ -56,6 +62,7 @@ const DEFAULT_PROJECT_CONFIG: AppConfig['PROJECT'] = {
   LOGO_URL: '/assets/images/inWeather-logo.svg',
   AVAILABLE_LANGUAGES: ['en'],
   DEFAULT_LANG: 'en',
+  MEASUREMENT_SYSTEM: MeasurementSystem.METRIC,
 };
 
 const DEFAULT_WEATHER_API_CONFIG: AppConfig['WEATHER_API'] = {

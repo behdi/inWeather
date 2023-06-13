@@ -23,7 +23,7 @@ export class TempUnitConvertorPipe implements PipeTransform {
     decimalPlaces = 2
   ): number {
     const convertedValue =
-      convertTo === 'celsius'
+      convertTo === TemperatureUnits.CELSIUS
         ? this._convertToCelsius(value)
         : this._convertToFahrenheit(value);
 

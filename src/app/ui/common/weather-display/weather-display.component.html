@@ -1,8 +1,31 @@
 <div class="weather-data" *ngIf="weatherData && !isLoadingWeatherData">
-  <p class="weather-data-title">
-    {{ "weatherDisplay.generalInfo" | transloco : { place: weatherData.name } }}
+  <header class="weather-data-header">
+    <p class="weather-data-title">
+      {{
+        "weatherDisplay.generalInfo" | transloco : { place: weatherData.name }
+      }}
+    </p>
+
+    <nz-switch
+      [(ngModel)]="isMetric"
+      [nzCheckedChildren]="checkedTemplate"
+      [nzUnCheckedChildren]="unCheckedTemplate"
+      (ngModelChange)="onUnitChange()"
+    ></nz-switch>
+    <ng-template #checkedTemplate>Metric</ng-template>
+    <ng-template #unCheckedTemplate>Imperial</ng-template>
+  </header>
+
+  <p class="weather-data-temp">
+    {{
+      performUnitConversion
+        ? (weatherData.main.temp
+          | tempUnitConvertor
+            : (isMetric ? tempUnits.FAHRENHEIT : tempUnits.CELSIUS))
+        : weatherData.main.temp
+    }}
+    {{ isMetric ? "°C" : "°F" }}
   </p>
-  <p class="weather-data-temp">{{ weatherData.main.temp }} °C</p>
   <p *ngIf="weatherData.weather[0] as condition" class="weather-condition">
     <img
       class="weather-condition-icon"

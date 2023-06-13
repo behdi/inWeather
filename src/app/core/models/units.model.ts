@@ -1,1 +1,9 @@
-export type TemperatureUnits = 'celsius' | 'fahrenheit';
+export enum MeasurementSystem {
+  METRIC,
+  IMPERIAL,
+}
+
+export enum TemperatureUnits {
+  CELSIUS,
+  FAHRENHEIT,
+}
