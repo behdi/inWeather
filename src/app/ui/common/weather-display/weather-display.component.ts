@@ -29,13 +29,35 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
   styleUrls: ['./weather-display.component.less'],
 })
 export class WeatherDisplayComponent implements OnInit {
+  /**
+   * Weather data to be rendered.
+   */
   @Input({ required: true }) weatherData: CurrentWeather | null = null;
+
+  /**
+   * Weather data loading status.
+   */
   @Input({ required: true }) isLoadingWeatherData = false;
-  @Input({ required: true }) defaultMeasurementSystem: MeasurementSystem =
+
+  /**
+   * Application's default measurement system.
+   */
+  @Input({ required: true }) defaultMeasurementSystem =
     MeasurementSystem.METRIC;
-  tempUnits = TemperatureUnits;
+
+  /**
+   * Status of unit conversion switch.
+   *
+   * States whether the switch is in metric mode.
+   */
   isMetric = true;
-  performUnitConversion = false;
+
+  /**
+   * Unit we should convert the temperature to.
+   *
+   * If set to null, no conversion must take place.
+   */
+  conversionTarget: TemperatureUnits | null = null;
 
   /**
    * Component onInit hook
@@ -48,13 +70,13 @@ export class WeatherDisplayComponent implements OnInit {
    * Executes when unit switch value is changed.
    */
   onUnitChange() {
-    this.performUnitConversion = false;
+    this.conversionTarget = null;
 
     if (
       this.defaultMeasurementSystem === MeasurementSystem.METRIC &&
       this.isMetric === false
     ) {
-      this.performUnitConversion = true;
+      this.conversionTarget = TemperatureUnits.FAHRENHEIT;
       return;
     }
 
@@ -62,7 +84,7 @@ export class WeatherDisplayComponent implements OnInit {
       this.defaultMeasurementSystem === MeasurementSystem.IMPERIAL &&
       this.isMetric === true
     ) {
-      this.performUnitConversion = true;
+      this.conversionTarget = TemperatureUnits.CELSIUS;
       return;
     }
   }

@@ -1,9 +1,9 @@
 export enum MeasurementSystem {
-  METRIC,
-  IMPERIAL,
+  METRIC = 'Metric',
+  IMPERIAL = 'Imperial',
 }
 
 export enum TemperatureUnits {
-  CELSIUS,
-  FAHRENHEIT,
+  CELSIUS = 'Celsius',
+  FAHRENHEIT = 'Fahrenheit',
 }

@@ -4,6 +4,7 @@ import { APP_CONFIG } from '../../app';
 import { GeoData } from '../interfaces';
 import { CurrentWeather } from '../interfaces/current-weather.model';
 import { GEO_CODING_ENDPOINTS, WEATHER_ENDPOINTS } from '../models';
+import { MeasurementSystem } from '../../models';
 
 /**
  * API service
@@ -38,18 +39,16 @@ export class ApiService {
    *
    * @param lat - Latitude of the desired location.
    * @param lon - Longitude of the desired location.
-   * @param units - unit the data should be displayed in.
    * @returns current weather of the specified location
    */
-  getCurrentWeather(
-    lat: string,
-    lon: string,
-    units: 'metric' | 'imperial' = 'metric'
-  ) {
+  getCurrentWeather(lat: string, lon: string) {
     const url = this.getURL(WEATHER_ENDPOINTS.CURRENT, {
       lat,
       lon,
-      units,
+      units:
+        this._config.PROJECT.MEASUREMENT_SYSTEM === MeasurementSystem.IMPERIAL
+          ? 'imperial'
+          : 'metric',
     });
 
     return this._http.get<CurrentWeather>(url);

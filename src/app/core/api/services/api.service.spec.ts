@@ -9,6 +9,7 @@ import { GeoData } from '../interfaces';
 import { CurrentWeather } from '../interfaces/current-weather.model';
 import { APP_CONFIG } from '../../app';
 import { mockAppConfig } from 'src/app/utils';
+import { MeasurementSystem } from '../../models';
 
 describe('ApiServiceService', () => {
   let service: ApiService;
@@ -177,13 +178,20 @@ describe('ApiServiceService', () => {
         url,
       });
     };
+
+    // FIXME: add proper test coverage for unit
     it(`should call correct endpoint to fetch currentWeather data`, () => {
-      service.getCurrentWeather('0', '0', 'imperial').subscribe();
-      const { request } = verifyCurrentWeatherEndpoint('0', '0', 'imperial');
+      service.getCurrentWeather('0', '0').subscribe();
+      const { request } = verifyCurrentWeatherEndpoint('0', '0');
 
       expect(request.method).toBe('GET');
       expect(request.url).toBe(
-        'https://test.weather.com/data/2.5/weather?lat=0&lon=0&units=imperial'
+        `https://test.weather.com/data/2.5/weather?lat=0&lon=0&units=${
+          mockAppConfig.PROJECT.MEASUREMENT_SYSTEM ===
+          MeasurementSystem.IMPERIAL
+            ? 'imperial'
+            : 'metric'
+        }`
       );
     });
 

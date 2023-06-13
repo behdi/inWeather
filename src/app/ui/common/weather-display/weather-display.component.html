@@ -18,10 +18,8 @@
 
   <p class="weather-data-temp">
     {{
-      performUnitConversion
-        ? (weatherData.main.temp
-          | tempUnitConvertor
-            : (isMetric ? tempUnits.FAHRENHEIT : tempUnits.CELSIUS))
+      conversionTarget
+        ? (weatherData.main.temp | tempUnitConvertor : conversionTarget)
         : weatherData.main.temp
     }}
     {{ isMetric ? "°C" : "°F" }}

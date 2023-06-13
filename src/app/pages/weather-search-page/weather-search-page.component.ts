@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  APP_CONFIG,
-  ApiService,
-  CurrentWeather,
-  MeasurementSystem,
-} from '@inWeather/core';
+import { APP_CONFIG, ApiService, CurrentWeather } from '@inWeather/core';
 import { CardComponent, WeatherDisplayComponent } from '@inWeather/ui';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -24,7 +19,6 @@ import {
   tap,
 } from 'rxjs';
 import { WeatherSearchOption } from './types/search-options.type';
-import { appConfig } from 'src/app/app.config';
 
 /**
  * Weather search page component class.
@@ -99,50 +93,49 @@ export class WeatherSearchPageComponent implements OnInit {
    */
   ngOnInit(): void {
     this.optionList$ = this._getOptionsListStream();
-    // this.weatherData$ = this._getLocationWeatherDataStream();
-    this.weatherData$ = of({
-      coord: {
-        lon: 51.3896,
-        lat: 35.6893,
-      },
-      weather: [
-        {
-          id: 801,
-          main: 'Clouds',
-          description: 'few clouds',
-          icon: '02d',
-        },
-      ],
-      base: 'stations',
-      main: {
-        temp: 30.02,
-        feels_like: 28.32,
-        temp_min: 29.9,
-        temp_max: 30.1,
-        pressure: 1011,
-        humidity: 22,
-      },
-      visibility: 10000,
-      wind: {
-        speed: 3.09,
-        deg: 190,
-      },
-      clouds: {
-        all: 20,
-      },
-      dt: 1686634757,
-      sys: {
-        type: 2,
-        id: 47737,
-        country: 'IR',
-        sunrise: 1686619087,
-        sunset: 1686671450,
-      },
-      timezone: 12600,
-      id: 112931,
-      name: 'Tehran',
-      cod: 200,
-    });
+    this.weatherData$ = this._getLocationWeatherDataStream();
+    //   coord: {
+    //     lon: 51.3896,
+    //     lat: 35.6893,
+    //   },
+    //   weather: [
+    //     {
+    //       id: 801,
+    //       main: 'Clouds',
+    //       description: 'few clouds',
+    //       icon: '02d',
+    //     },
+    //   ],
+    //   base: 'stations',
+    //   main: {
+    //     temp: 30.02,
+    //     feels_like: 28.32,
+    //     temp_min: 29.9,
+    //     temp_max: 30.1,
+    //     pressure: 1011,
+    //     humidity: 22,
+    //   },
+    //   visibility: 10000,
+    //   wind: {
+    //     speed: 3.09,
+    //     deg: 190,
+    //   },
+    //   clouds: {
+    //     all: 20,
+    //   },
+    //   dt: 1686634757,
+    //   sys: {
+    //     type: 2,
+    //     id: 47737,
+    //     country: 'IR',
+    //     sunrise: 1686619087,
+    //     sunset: 1686671450,
+    //   },
+    //   timezone: 12600,
+    //   id: 112931,
+    //   name: 'Tehran',
+    //   cod: 200,
+    // });
   }
 
   /**
