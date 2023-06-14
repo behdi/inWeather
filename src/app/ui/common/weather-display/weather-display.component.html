@@ -18,8 +18,9 @@
 
   <p class="weather-data-temp">
     {{
-      conversionTarget
-        ? (weatherData.main.temp | tempUnitConvertor : conversionTarget)
+      conversionTarget.temperature
+        ? (weatherData.main.temp
+          | tempUnitConvertor : conversionTarget.temperature)
         : weatherData.main.temp
     }}
     {{ isMetric ? "°C" : "°F" }}
@@ -36,9 +37,17 @@
     {{ "weatherDisplay.humidity" | transloco }}
     {{ weatherData.main.humidity }}%
   </p>
-  <p class="weather-data-wind-speed">
+  <p
+    *ngIf="weatherData.wind.speed as windSpeed"
+    class="weather-data-wind-speed"
+  >
     {{ "weatherDisplay.windSpeed" | transloco }}
-    {{ weatherData.wind.speed }} km/hr
+    {{
+      conversionTarget.windSpeed
+        ? (windSpeed | windSpeedConvertor : conversionTarget.windSpeed)
+        : windSpeed
+    }}
+    {{ isMetric ? "m/s" : "mi/h" }}
   </p>
 </div>
 

@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  CurrentWeather,
-  MeasurementSystem,
-  TemperatureUnits,
-} from '@inWeather/core';
+import { CurrentWeather, MeasurementSystem } from '@inWeather/core';
 import { TempUnitConvertorPipe } from '@inWeather/utils';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import {
+  ConversionTarget,
+  IMPERIAL_CONVERSION_TARGET,
+  METRIC_CONVERSION_TARGET,
+} from './types';
+import { WindSpeedConvertorPipe } from 'src/app/utils/pipes/wind-speed-convertor.pipe';
 
 /**
  * Weather display class component.
@@ -24,6 +26,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzSwitchModule,
     FormsModule,
     TempUnitConvertorPipe,
+    WindSpeedConvertorPipe,
   ],
   templateUrl: './weather-display.component.html',
   styleUrls: ['./weather-display.component.less'],
@@ -53,11 +56,14 @@ export class WeatherDisplayComponent implements OnInit {
   isMetric = true;
 
   /**
-   * Unit we should convert the temperature to.
+   * Unit we should convert the the applicable to.
    *
-   * If set to null, no conversion must take place.
+   * If any of the keys are set to null, no conversion must take place.
    */
-  conversionTarget: TemperatureUnits | null = null;
+  conversionTarget: ConversionTarget = {
+    temperature: null,
+    windSpeed: null,
+  };
 
   /**
    * Component onInit hook
@@ -70,13 +76,18 @@ export class WeatherDisplayComponent implements OnInit {
    * Executes when unit switch value is changed.
    */
   onUnitChange() {
-    this.conversionTarget = null;
+    this.conversionTarget = {
+      temperature: null,
+      windSpeed: null,
+    };
 
     if (
       this.defaultMeasurementSystem === MeasurementSystem.METRIC &&
       this.isMetric === false
     ) {
-      this.conversionTarget = TemperatureUnits.FAHRENHEIT;
+      this.conversionTarget = {
+        ...IMPERIAL_CONVERSION_TARGET,
+      };
       return;
     }
 
@@ -84,7 +95,9 @@ export class WeatherDisplayComponent implements OnInit {
       this.defaultMeasurementSystem === MeasurementSystem.IMPERIAL &&
       this.isMetric === true
     ) {
-      this.conversionTarget = TemperatureUnits.CELSIUS;
+      this.conversionTarget = {
+        ...METRIC_CONVERSION_TARGET,
+      };
       return;
     }
   }
